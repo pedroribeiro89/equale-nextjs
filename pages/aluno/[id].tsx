@@ -4,6 +4,7 @@ import {GetStaticProps} from "next";
 import Head from "next/dist/next-server/lib/head";
 import {HEAD_CONFIG} from "../../components/head-config";
 import studentDetailStyle from '../../styles/student-detail.module.scss';
+import Link from "next/link";
 
 export default function Student({student}) {
     console.log(student);
@@ -36,9 +37,9 @@ export default function Student({student}) {
 
             <p> {student.description} </p>
 
-            <button>
-                <strong>Doe agora para Equale e ajude o {student.name}</strong>
-            </button>
+            <Link href="/doacao">
+                <button> <strong>Doe agora para Equale e ajude o {student.name}</strong> </button>
+            </Link>
             <br/>
             {
                 student.video ?

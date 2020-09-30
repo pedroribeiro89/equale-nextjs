@@ -18,7 +18,9 @@ const StudentCard: React.FunctionComponent<StudentCardProps> = props => {
             <Link href="/aluno/[id]" as={`/aluno/${student.id}`}>
                 <button>Conhecer Aluno</button>
             </Link>
-            <button className={styles.donate}>Doar</button>
+            <Link href="/doacao">
+                <button className={styles.donate}>Doar</button>
+            </Link>
         </section>
     );
 };
