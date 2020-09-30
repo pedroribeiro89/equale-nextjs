@@ -14,20 +14,32 @@ import {IUserData, UserDataFieldMap, UserDataFormValidator} from "../models/user
 export default function Donate() {
     const [step, setStep] = useState(1);
 
+    // const [userDataForm, setUserDataForm] = useState<IUserData>({
+    //         name: '',
+    //         email: '',
+    //         phone: '',
+    //         cep: null,
+    //         street: '',
+    //         streetNumber: null,
+    //         addressComplement: '',
+    //         city: '',
+    //         state: '',
+    //         password: '',
+    //         confirmPassword: ''
+    //     });
     const [userDataForm, setUserDataForm] = useState<IUserData>({
-            name: '',
-            email: '',
-            phone: '',
-            cep: null,
-            street: '',
-            streetNumber: null,
-            addressComplement: '',
-            city: '',
-            state: '',
-            password: '',
-            confirmPassword: ''
-        });
-
+        name: 'Pedro Ribeiro Bastos Soares',
+        email: 'pedro@teste.com',
+        phone: '31884840821',
+        cep: 30240280,
+        street: 'Rua engeneiro carlos antonini',
+        streetNumber: 112,
+        addressComplement: 'apto 102',
+        city: 'Belo Horizonte',
+        state: 'MG',
+        password: 'a',
+        confirmPassword: 'a'
+    });
 
     const userDataValidator = new UserDataFormValidator(userDataForm);
     const [userDataFormValidation, setUserDataFormValidation] = useState<IFormValidation>(null);
@@ -35,12 +47,21 @@ export default function Donate() {
 
 
 
+    // const [paymentDataForm, setPaymentDataForm] = useState<IPaymentData>({
+    //     cardName: '',
+    //     cardNumber: '',
+    //     expiryMonth: '',
+    //     expiryYear: '',
+    //     cvv: '',
+    //     donation: 200,
+    //     subscription: true
+    // });
     const [paymentDataForm, setPaymentDataForm] = useState<IPaymentData>({
-        cardName: '',
-        cardNumber: '',
-        expiryMonth: '',
-        expiryYear: '',
-        cvv: '',
+        cardName: 'a',
+        cardNumber: 'a',
+        expiryMonth: '2',
+        expiryYear: '2020',
+        cvv: 'a',
         donation: 200,
         subscription: true
     });
