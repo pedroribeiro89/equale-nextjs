@@ -1,1 +1,3 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+# Portal do Instituto Equale
+
+Done in next.js for SSR
