@@ -1,0 +1,30 @@
+@import 'theme.scss';
+
+html, body {
+    width: 100%;
+    margin: 0;
+    //height: 100%;
+    //min-height: 100%;
+}
+body {
+    font-family: $font;
+    color: $text-color;
+}
+
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div,
+div#__next > div > div {
+    margin: 0; padding: 0;
+    min-height: 100vh;
+}
+
+
+@font-face{
+    font-family: edosz;
+    src: url("../public/edosz.ttf");
+}
+
+

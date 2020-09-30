@@ -1,0 +1,41 @@
+@import 'theme.scss';
+
+.about {
+  text-align: center;
+  color: $text-color;
+  h1 {
+    font-size: 25px;
+    font-family: $accent-font;
+    margin: 0;
+  }
+}
+
+.goals {
+  color: $accent-color;
+  text-align: center;
+  h1 {
+    font-size: 25px;
+    font-family: $accent-font;
+  }
+
+  p {
+    font-size: 30px;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+.students {
+  text-align: center;
+  color: $text-color;
+  h1 {
+    font-size: 25px;
+    font-family: $accent-font;
+  }
+
+  div {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

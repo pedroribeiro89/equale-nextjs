@@ -1,0 +1,14 @@
+@import '../../styles/theme.scss';
+
+.fieldset {
+  margin-bottom: 10px;
+
+  li {
+    color: $accent-color;
+  }
+
+  @media (min-width: $max-mobile-width) {
+    width: 50%;
+    margin: auto;
+  }
+}

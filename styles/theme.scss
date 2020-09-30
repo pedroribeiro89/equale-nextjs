@@ -1,0 +1,28 @@
+$max-mobile-width: 770px;
+
+$primary-color: #3E5473;
+$secondary-color: #222F40;
+$accent-color: #BF9441;
+$text-color: white;
+
+$font: Roboto, "Helvetica Neue", sans-serif;
+$accent-font: edosz, 'open sans', sans-serif;
+
+
+@mixin equale-btn($text, $background) {
+  color: $text;
+  background: $background;
+  border: none;
+  border-radius: 5px;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  cursor: pointer;
+  &:hover {
+    @if $background != 'none' {
+      background-color: rgba($background, 1);
+    } @else {
+      background-color: rgba(black, .1);
+    }
+  }
+}

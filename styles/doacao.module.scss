@@ -1,0 +1,47 @@
+@import 'theme.scss';
+
+.checkout {
+  background-color: $primary-color;
+  padding: 5px;
+  h1 {
+    text-align: center;
+  }
+
+  .btncontainer {
+    text-align: right;
+    button {
+      display: inline-block;
+    }
+  }
+
+  .prevbtn {
+    @include equale-btn(white, none);
+  }
+
+  .nextbtn {
+    @include equale-btn(white, $accent-color);
+  }
+
+}
+
+.stepper {
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  font-size: 12px;
+  @media (min-width: $max-mobile-width) {
+    font-size: 20px;
+  }
+
+  li {
+    margin: auto;
+  }
+}
+
+.active {
+  border-bottom: 3px solid $accent-color;
+}
+
+
+

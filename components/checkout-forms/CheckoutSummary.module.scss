@@ -1,0 +1,18 @@
+@import '../../styles/theme.scss';
+
+
+.summary {
+  h1 { font-size: 25px }
+
+  section {
+    padding: 0 10px;
+    h2 {
+      font-size: 20px;
+    }
+
+    @media (min-width: $max-mobile-width) {
+      width: 50%;
+      margin: auto;
+    }
+  }
+}
