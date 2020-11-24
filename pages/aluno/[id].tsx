@@ -7,26 +7,6 @@ import studentDetailStyle from '../../styles/student-detail.module.scss';
 import Link from "next/link";
 
 export default function Student({student}) {
-    console.log(student);
-    console.log(studentDetailStyle.student);
-    const x = student.description;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-    // student.description += x;
-
-    // student.video = null;
-
     return <Layout>
         <Head>
             <title>{HEAD_CONFIG.title}</title>
@@ -67,7 +47,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async context => {
     const getStudent = async (id) => {
-        const res = await fetch('http://localhost:3000/students/'+id);
+        const res = await fetch(process.env.BASE_URL + '/students/' + id);
         console.log(res);
         return await res.json();
     };

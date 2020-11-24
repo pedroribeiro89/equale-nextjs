@@ -23,6 +23,7 @@ const PaymentDataForm: React.FunctionComponent<PaymentDataFormProps> = ({ form, 
     const [expiryYear, setExpiryYear] = useState(form.expiryYear);
     const [donation, setDonation] = useState(form.donation);
     const [subscription, setSubscription] = useState(form.subscription);
+    const [cpf, setCpf] = useState(form.cpf);
 
     return (
         <form className={formStyles.form}>
@@ -44,6 +45,7 @@ const PaymentDataForm: React.FunctionComponent<PaymentDataFormProps> = ({ form, 
                 <option value={100}>R$ 100,00</option>
                 <option value={50}>R$ 50,00</option>
             </select>
+            <input type="text" placeholder={PaymentDataFieldMap['cpf']} defaultValue={form.cpf} onChange={(event) => inputChangeEvent('cpf', event.target.value)} />
             <div className={formStyles.checkboxcontainer}>
                 <span>{PaymentDataFieldMap['subscription']}: </span>
                 <label className={formStyles.checkbox}>
@@ -51,8 +53,6 @@ const PaymentDataForm: React.FunctionComponent<PaymentDataFormProps> = ({ form, 
                     <span className={formStyles.checkmark}></span>
                 </label>
             </div>
-
-
 
         </form>
     );

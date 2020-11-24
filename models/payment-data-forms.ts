@@ -1,5 +1,4 @@
 import {IFieldValidation, IFormValidation, IFormValidator} from "./checkout-forms";
-import {IUserData} from "./user-data-forms";
 
 export interface IPaymentData {
     cardName: string;
@@ -9,6 +8,7 @@ export interface IPaymentData {
     cvv: string;
     donation: number;
     subscription: boolean;
+    cpf: string;
 }
 
 export const PaymentDataFieldMap = {
@@ -18,7 +18,8 @@ export const PaymentDataFieldMap = {
     expiryYear: "Ano de Expiração",
     cvv: "CVV",
     donation: "Doação",
-    subscription: "Doar mensamente"
+    subscription: "Doar mensamente",
+    cpf: "CPF"
 };
 
 export class PaymentDataFormValidator implements IFormValidator<IPaymentData> {
@@ -51,6 +52,9 @@ export class PaymentDataFormValidator implements IFormValidator<IPaymentData> {
         }
         if (this.form.subscription === null) {
             fieldValidations.push({ field: 'subscription', msg: 'Assinatura é obrigatório' });
+        }
+        if (this.form.cpf === null) {
+            fieldValidations.push({ field: 'cpf', msg: 'CPF é obrigatório' });
         }
         return { valid: fieldValidations.length === 0, fieldValidations};
     }

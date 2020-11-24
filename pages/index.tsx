@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Layout from '../components/layout'
 import indexStyle from '../styles/index.module.scss'
 import fetch from 'node-fetch'
-import Link from 'next/link'
 import {GetServerSideProps} from "next";
 import {HEAD_CONFIG} from "../components/head-config";
 import StudentCard from "../components/student/student-card";
@@ -39,128 +38,15 @@ export default function Home({ students }) {
 }
 
 export async function listStudents() {
-    // Instead of the file system,
-    // fetch post data from an external API endpoint
-    const res = await fetch('http://localhost:3000/students');
+    const res = await fetch(process.env.BASE_URL + '/students');
     return await res.json();
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
     let students = await listStudents();
-    console.log(students);
-
-    // students = [
-    //     { id: 1,
-    //     name: 'aluno 1',
-    //     email: 'aluno1@equale.com',
-    //     type: 2,
-    //     photo:
-    //         'https://www.meioemensagem.com.br/wp-content/uploads/2019/05/CHARLINHO_QuiosqueMcFritas.jpg',
-    //     video: 'https://www.youtube.com/embed/B6Vyhtvpp4k',
-    //     description: 'aluno 1 desc',
-    //     phone: '11111111',
-    //     cep: 11111111,
-    //     street: 'rua aluno 1',
-    //     streetNumber: 111,
-    //     addressComplement: 'compl aluno 1 ',
-    //     city: 'cidade aluno 1',
-    //     state: 'AL',
-    //     password:
-    //         '$2b$10$JePa5v5aYEwIFYjrcWhWPewRD8mBV2RnA.bQgsF5sNpcwDzmAfh7q',
-    //     createdAt: '2020-06-14T13:42:32.000Z',
-    //     updatedAt: '2020-06-14T13:43:15.000Z',
-    //     CourseId: 1 },
-    //     { id: 2,
-    //         name: 'aluno 1',
-    //         email: 'aluno1@email.com',
-    //         type: 2,
-    //         photo:
-    //             'https://nova-escola-producao.s3.amazonaws.com/fme9Nu3B2KpXWDFqnUn88JYJUWx2sUCFyZGBBvy9jAHxabd55BsW76mDT5av/atencao-alunos-gettyimages.jpg',
-    //         video: 'https://www.youtube.com/watch?v=YrYw0sxU2Cw',
-    //         description:
-    //             'descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao ',
-    //         phone: '31988888888',
-    //         cep: 30300300,
-    //         street: 'Rua de teste',
-    //         streetNumber: 112,
-    //         addressComplement: 'teste complementa',
-    //         city: 'Belo Horizonte',
-    //         state: 'MG',
-    //         password:
-    //             '$2b$10$kLPZmlVhVNgcbfhVNPdpc.bIPQsb0HOArD71icB9uB5L4wkOXZHlW',
-    //         createdAt: '2020-08-10T17:19:29.000Z',
-    //         updatedAt: '2020-08-10T17:19:29.000Z',
-    //         CourseId: 1 },
-    //     { id: 3,
-    //         name: 'aluno 1',
-    //         email: 'aluno1@email.com',
-    //         type: 2,
-    //         photo:
-    //             'https://nova-escola-producao.s3.amazonaws.com/fme9Nu3B2KpXWDFqnUn88JYJUWx2sUCFyZGBBvy9jAHxabd55BsW76mDT5av/atencao-alunos-gettyimages.jpg',
-    //         video: 'https://www.youtube.com/watch?v=YrYw0sxU2Cw',
-    //         description:
-    //             'descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao ',
-    //         phone: '31988888888',
-    //         cep: 30300300,
-    //         street: 'Rua de teste',
-    //         streetNumber: 112,
-    //         addressComplement: 'teste complementa',
-    //         city: 'Belo Horizonte',
-    //         state: 'MG',
-    //         password:
-    //             '$2b$10$kLPZmlVhVNgcbfhVNPdpc.bIPQsb0HOArD71icB9uB5L4wkOXZHlW',
-    //         createdAt: '2020-08-10T17:19:29.000Z',
-    //         updatedAt: '2020-08-10T17:19:29.000Z',
-    //         CourseId: 1 },
-    //     { id: 4,
-    //         name: 'aluno 1',
-    //         email: 'aluno1@email.com',
-    //         type: 2,
-    //         photo:
-    //             'https://nova-escola-producao.s3.amazonaws.com/fme9Nu3B2KpXWDFqnUn88JYJUWx2sUCFyZGBBvy9jAHxabd55BsW76mDT5av/atencao-alunos-gettyimages.jpg',
-    //         video: 'https://www.youtube.com/watch?v=YrYw0sxU2Cw',
-    //         description:
-    //             'descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao ',
-    //         phone: '31988888888',
-    //         cep: 30300300,
-    //         street: 'Rua de teste',
-    //         streetNumber: 112,
-    //         addressComplement: 'teste complementa',
-    //         city: 'Belo Horizonte',
-    //         state: 'MG',
-    //         password:
-    //             '$2b$10$kLPZmlVhVNgcbfhVNPdpc.bIPQsb0HOArD71icB9uB5L4wkOXZHlW',
-    //         createdAt: '2020-08-10T17:19:29.000Z',
-    //         updatedAt: '2020-08-10T17:19:29.000Z',
-    //         CourseId: 1 },
-    //     { id: 5,
-    //         name: 'aluno 1',
-    //         email: 'aluno1@email.com',
-    //         type: 2,
-    //         photo:
-    //             'https://nova-escola-producao.s3.amazonaws.com/fme9Nu3B2KpXWDFqnUn88JYJUWx2sUCFyZGBBvy9jAHxabd55BsW76mDT5av/atencao-alunos-gettyimages.jpg',
-    //         video: 'https://www.youtube.com/watch?v=YrYw0sxU2Cw',
-    //         description:
-    //             'descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao descricao ',
-    //         phone: '31988888888',
-    //         cep: 30300300,
-    //         street: 'Rua de teste',
-    //         streetNumber: 112,
-    //         addressComplement: 'teste complementa',
-    //         city: 'Belo Horizonte',
-    //         state: 'MG',
-    //         password:
-    //             '$2b$10$kLPZmlVhVNgcbfhVNPdpc.bIPQsb0HOArD71icB9uB5L4wkOXZHlW',
-    //         createdAt: '2020-08-10T17:19:29.000Z',
-    //         updatedAt: '2020-08-10T17:19:29.000Z',
-    //         CourseId: 1 }
-    //     ];
-
-
-
     return {
         props: {
             students
         }
-    }
-}
+    };
+};

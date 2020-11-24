@@ -14,61 +14,37 @@ import {IUserData, UserDataFieldMap, UserDataFormValidator} from "../models/user
 export default function Donate() {
     const [step, setStep] = useState(1);
 
-    // const [userDataForm, setUserDataForm] = useState<IUserData>({
-    //         name: '',
-    //         email: '',
-    //         phone: '',
-    //         cep: null,
-    //         street: '',
-    //         streetNumber: null,
-    //         addressComplement: '',
-    //         city: '',
-    //         state: '',
-    //         password: '',
-    //         confirmPassword: ''
-    //     });
     const [userDataForm, setUserDataForm] = useState<IUserData>({
-        name: 'Pedro Ribeiro Bastos Soares',
-        email: 'pedro@teste.com',
-        phone: '31884840821',
-        cep: 30240280,
-        street: 'Rua engeneiro carlos antonini',
-        streetNumber: 112,
-        addressComplement: 'apto 102',
-        city: 'Belo Horizonte',
-        state: 'MG',
-        password: 'a',
-        confirmPassword: 'a'
-    });
+            name: '',
+            email: '',
+            phone: '',
+            cep: null,
+            street: '',
+            streetNumber: null,
+            addressComplement: '',
+            city: '',
+            state: '',
+            password: '',
+            confirmPassword: ''
+        });
 
     const userDataValidator = new UserDataFormValidator(userDataForm);
     const [userDataFormValidation, setUserDataFormValidation] = useState<IFormValidation>(null);
     const changeUserDataForm = value => { setUserDataForm(value); };
 
-
-
-    // const [paymentDataForm, setPaymentDataForm] = useState<IPaymentData>({
-    //     cardName: '',
-    //     cardNumber: '',
-    //     expiryMonth: '',
-    //     expiryYear: '',
-    //     cvv: '',
-    //     donation: 200,
-    //     subscription: true
-    // });
     const [paymentDataForm, setPaymentDataForm] = useState<IPaymentData>({
-        cardName: 'a',
-        cardNumber: 'a',
-        expiryMonth: '2',
-        expiryYear: '2020',
-        cvv: 'a',
+        cardName: '',
+        cardNumber: '',
+        expiryMonth: '',
+        expiryYear: '',
+        cvv: '',
         donation: 200,
         subscription: true
     });
 
     const paymentDataValidator = new PaymentDataFormValidator(paymentDataForm);
     const [paymentDataFormValidation, setPaymentDataFormValidation] = useState<IFormValidation>(null);
-    const changePaymentDataForm = value => { setPaymentDataForm(value); console.log(paymentDataForm); };
+    const changePaymentDataForm = value => { setPaymentDataForm(value);  };
 
     const next = () => {
         if (step === 1) {
@@ -82,20 +58,37 @@ export default function Donate() {
         }
     };
 
+    // let serverMsg = '';
+    const [serverMsg, setServerMsg] = useState({status: '', msg: ''});
+    const [isDonationRequest, setIsDonationRequest] = useState(false);
     const donate = () => {
         const body = {
             payment: paymentDataForm,
             user: userDataForm
         };//JSON.stringify(body)
+
         const params = new URLSearchParams();
         params.append('paymentDataForm', JSON.stringify(paymentDataForm));
         params.append('userDataForm', JSON.stringify(userDataForm));
-        fetch('http://localhost:3000/donation/', {
+
+        setIsDonationRequest(true);
+        fetch(process.env.BASE_URL + '/donation/', {
             method: 'POST',
             body: params,
         })
-            .then(res => res.json()) // expecting a json response
-            .then(json => console.log(json));
+            .then(response => response.ok ? { status: 200 } : response.json())
+            .then(responseBody => {
+                if (responseBody.status >= 200 && responseBody.status < 300) {
+                    setServerMsg({status: 'ok', msg:'Doação realizada com sucesso'});
+                } else {
+                    setServerMsg(
+                        responseBody && responseBody.message ?
+                            {status: 'error', msg: responseBody.message} :
+                            {status: 'error', msg:'Erro inesperado, tente novamente mais tarde'}
+                    );
+                }
+                setIsDonationRequest(false);
+            })
     };
 
     return (
@@ -127,11 +120,15 @@ export default function Donate() {
                         <FormValidationError validations={paymentDataFormValidation.fieldValidations} fieldNameMap={PaymentDataFieldMap} />
                         : ''
                 }
+                {
+                    serverMsg.status !== '' ? <p className={doacaoStyle.servermsg}><strong>{serverMsg.msg}</strong></p> : ''
+                }
+
 
                 <div className={doacaoStyle.btncontainer}>
                     { step > 1 ? <button className={doacaoStyle.prevbtn} onClick={() => setStep(step - 1)}><strong>Voltar</strong></button> : '' }
                     { step < 3 ? <button className={doacaoStyle.nextbtn} onClick={next}><strong>Próximo</strong></button> : '' }
-                    { step === 3 ? <button className={doacaoStyle.nextbtn} onClick={donate}><strong>Finalizar Doação</strong></button> : '' }
+                    { step === 3 && serverMsg.status !== 'ok' ? <button className={doacaoStyle.nextbtn} onClick={donate} disabled={isDonationRequest}><strong>Finalizar Doação</strong></button> : '' }
                 </div>
             </article>
         </Layout>

@@ -35,6 +35,7 @@ const CheckoutSummary: React.FunctionComponent<CheckoutReviewProps> = ({ userDat
                     <li><strong>Data Vencimento:</strong> {paymentData.expiryMonth}/{paymentData.expiryYear}</li>
                     <li><strong>CVV:</strong> {paymentData.cvv}</li>
                     <li><strong>Doação:</strong> {paymentData.donation} {paymentData.subscription ? '(Doação mensal)' : ''}</li>
+                    <li><strong>CPF:</strong> {paymentData.cpf} </li>
                 </ul>
             </section>
         </article>
