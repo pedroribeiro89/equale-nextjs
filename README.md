@@ -3,7 +3,6 @@
 Done in next.js for SSR
 
 Run project(make sure back-end is runing on port 3000 before executing): 
-    ```shell
+
         npm run dev
-    ```
 
