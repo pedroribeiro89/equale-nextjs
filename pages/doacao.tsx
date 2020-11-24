@@ -39,7 +39,8 @@ export default function Donate() {
         expiryYear: '',
         cvv: '',
         donation: 200,
-        subscription: true
+        subscription: true,
+        cpf: ''
     });
 
     const paymentDataValidator = new PaymentDataFormValidator(paymentDataForm);
