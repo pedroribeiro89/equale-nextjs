@@ -5,6 +5,7 @@ import Head from "next/dist/next-server/lib/head";
 import {HEAD_CONFIG} from "../../components/head-config";
 import studentDetailStyle from '../../styles/student-detail.module.scss';
 import Link from "next/link";
+import {listStudents} from "../index";
 
 export default function Student({student}) {
     return <Layout>
@@ -30,7 +31,12 @@ export default function Student({student}) {
 }
 
 export async function getStaticPaths() {
-    const paths = [{params: { id: '1' } }, {params:{ id: '2'} }];
+    let students = await listStudents();
+
+    const paths = [];
+    students.map(student => {
+        paths.push({ params: { id: student.id.toString() } });
+    });
     return {
         paths,
         fallback: false
@@ -69,3 +75,5 @@ export const getStaticProps: GetStaticProps = async context => {
         }
     };
 };
+
+
