@@ -46,15 +46,23 @@ export async function getStaticPaths() {
 // }
 
 export const getStaticProps: GetStaticProps = async context => {
-    const getStudent = async (id) => {
-        const res = await fetch(process.env.BASE_URL + '/students/' + id);
-        console.log(res);
-        return await res.json();
-    };
+    // const getStudent = async (id) => {
+    //     const res = await fetch(process.env.BASE_URL + '/students/' + id);
+    //     console.log(res);
+    //     return await res.json();
+    // };
+    //
+    // console.log(context);
+    // const student = await getStudent(context.params.id);
+    // console.log(student);
+    // return {
+    //     props: {
+    //         student
+    //     }
+    // };
 
-    console.log(context);
-    const student = await getStudent(context.params.id);
-    console.log(student);
+    const res = await fetch(process.env.BASE_URL + '/students/' + context.params.id);
+    const student = await res.json();
     return {
         props: {
             student
