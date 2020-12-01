@@ -73,7 +73,7 @@ export default function Donate() {
         params.append('userDataForm', JSON.stringify(userDataForm));
 
         setIsDonationRequest(true);
-        fetch(process.env.BASE_URL + '/donation/', {
+        fetch(process.env.BASE_URL + '/donation', {
             method: 'POST',
             body: params,
         })
