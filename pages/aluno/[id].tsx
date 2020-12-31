@@ -43,30 +43,7 @@ export async function getStaticPaths() {
     }
 }
 
-
-// export async function getStudent(id) {
-//     // Instead of the file system,
-//     // fetch post data from an external API endpoint
-//     const res = await fetch('http://localhost:3000/students/'+id);
-//     return await res.json();
-// }
-
 export const getStaticProps: GetStaticProps = async context => {
-    // const getStudent = async (id) => {
-    //     const res = await fetch(process.env.BASE_URL + '/students/' + id);
-    //     console.log(res);
-    //     return await res.json();
-    // };
-    //
-    // console.log(context);
-    // const student = await getStudent(context.params.id);
-    // console.log(student);
-    // return {
-    //     props: {
-    //         student
-    //     }
-    // };
-
     const res = await fetch(process.env.BASE_URL + '/students/' + context.params.id);
     const student = await res.json();
     return {

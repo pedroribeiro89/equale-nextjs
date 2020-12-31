@@ -2,9 +2,6 @@ import Head from 'next/head'
 import styles from './layout.module.scss'
 import {HEAD_CONFIG} from "./head-config";
 
-// const name = 'Pedro'
-// export const siteTitle = 'Next.js Sample Website'
-
 export default function Layout({ children }) {
     return (
         <div>

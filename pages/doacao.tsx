@@ -59,14 +59,13 @@ export default function Donate() {
         }
     };
 
-    // let serverMsg = '';
     const [serverMsg, setServerMsg] = useState({status: '', msg: ''});
     const [isDonationRequest, setIsDonationRequest] = useState(false);
     const donate = () => {
         const body = {
             payment: paymentDataForm,
             user: userDataForm
-        };//JSON.stringify(body)
+        };
 
         const params = new URLSearchParams();
         params.append('paymentDataForm', JSON.stringify(paymentDataForm));
@@ -135,17 +134,3 @@ export default function Donate() {
         </Layout>
     );
 }
-
-
-
-// {
-//     step === 1 ? <li className={doacaoStyle.active}>Seus Dados</li> : <li>Seus Dados</li>
-// }
-//
-// {
-//     step === 2 ? <li className={doacaoStyle.active}>Seus Dados</li> : <li>Seus Dados</li>
-// }
-//
-// {
-//     step === 3 ? <li className={doacaoStyle.active}>Seus Dados</li> : <li>Seus Dados</li>
-// }
